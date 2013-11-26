@@ -9,24 +9,16 @@ define([
 ], function(Backbone, RootView, ContactCollection, ContactListIndexView, ContactListDetailView, PetsView, PetsCollection) {
   return Backbone.Router.extend({
     routes: {
-      "": "index",
-      "details/:id": "details",
-      "colinNewRoute": "colinNewRoute"
+      "foo1": "index",
+      "foo2/:id": "details",
+      "": "vimeo"
     },
-    colinNewRoute: function(){
-      var pets = new PetsCollection();
-      pets.create({name: "fifi", breed: "labradoodle"});
-      pets.create({name: "fido", breed: "golden retriever"});
-      pets.create({name: "snowball", breed: "maltese"});
-
-      console.log(pets);
-
-      var petsView = new PetsView({
-        collection: pets
+    vimeo: function(){
+      $.ajax({
+        url: "http://vimeo.com/api/v2/channel/kinetictypography/videos.json"
+      }).done(function(data){
+        console.log(data);
       });
-
-      RootView.getInstance().setView(petsView)
-
     },
     index: function() {
       var contacts = new ContactCollection();
