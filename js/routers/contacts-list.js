@@ -23,6 +23,12 @@ define([
         url: "http://vimeo.com/api/v2/channel/kinetictypography/videos.json"
       }).done(function(data){
         VIMEOVIDEOS.vimeoVideosCollection.add(data);
+        var view = new VimeoVideosView({
+          collection: VIMEOVIDEOS.vimeoVideosCollection
+        });
+
+        RootView.getInstance().setView(view);
+
       });
     },
     index: function() {
